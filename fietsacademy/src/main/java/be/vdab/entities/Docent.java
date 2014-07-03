@@ -10,10 +10,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import be.vdab.enums.Geslacht;
-
 @Entity
 @Table(name="docenten")
 public class Docent implements Serializable{
@@ -92,10 +92,7 @@ public class Docent implements Serializable{
 	public long getRijksRegisterNr() {
 		return rijksRegisterNr;
 	}
-	//je maakt getters voor de private variabelen, behalve voor serialVersionUID
-	protected Docent(){
-		
-	}
+	protected Docent(){}
 	public void opslag(BigDecimal percentage){
 		BigDecimal factor = BigDecimal.ONE.add(percentage.divide(new BigDecimal(100)));
 		wedde = wedde.multiply(factor, new MathContext(2, RoundingMode.HALF_UP));

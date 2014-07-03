@@ -17,7 +17,7 @@
 		<h1>Docenten van tot wedde</h1>
 		<form>
 			<label>Van:<span>${fouten.van}</span><input name="van" value="${param.van}" type="number" min="0" step="0.01" required autofocus></label>
-			<label>Tot:<span>${fouten.tot}</span><input name="tot" value="${param.tot}" type="number" mmin="0" step="0.01" required></label>
+			<label>Tot:<span>${fouten.tot}</span><input name="tot" value="${empty tot ? param.tot : tot}" type="number" mmin="0" step="0.01" required></label>
 			<input type="submit" value="Zoeken">
 		</form>
 		<c:if test="${not empty param and empty fouten and empty docenten}">
@@ -40,6 +40,24 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<c:if test="${vanafRij != 0}">
+			<c:url value="" var="vorigePaginaURL">
+				<c:param name="van" value="${param.van}"/>
+				<c:param name="tot" value="${param.tot}"/>
+				<c:param name="vanafRij" value="${vanafRij - aantalRijen}"/>
+			</c:url>
+			<a href="<c:out value='${vorigePaginaURL}'/>"title="vorige pagina">
+			<img src="${contextPath}/images/vorigepagina.png" alt="vorige pagina"/></a>
+		</c:if>
+		<c:if test="${empty laatstePagina}">
+			<c:url value="" var="volgendePaginaURL">
+				<c:param name="van" value="${param.van}"/>
+				<c:param name ="tot" value = "${param.tot}"/>
+				<c:param name ="vanafRij" value = "${vanafRij + aantalRijen}"/>
+			</c:url>
+			<a href="<c:out value='${volgendePaginaURL}'/>"title="volgende pagina">
+			<img src="${contextPath}/images/volgendepagina.png" alt="volgende pagina"/></a>
+		</c:if>
 		</c:if>
 	</body>
 </html>
